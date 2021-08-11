@@ -1,0 +1,2455 @@
+%!Tex TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[
+% -- opções da classe memoir --
+12pt,				% tamanho da fonte
+openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+oneside,			% para impressão em recto e verso. Oposto a oneside
+a4paper,			% tamanho do papel.
+% -- opções da classe abntex2 --
+% chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+% section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+% subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+% subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+% -- opções do pacote babel --
+% french,				% idioma adicional para hifenização
+% spanish,			% idioma adicional para hifenização
+brazil,				% o último idioma é o principal do documento
+english,			% idioma adicional para hifenização
+]{abntex2}
+\RequireXeTeX %Force XeTeX check
+
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de
+% justificação
+% \usepackage{amsmath}
+\usepackage{xltxtra}
+% \setmainfont{Source Han Sans CN}
+% \usepackage{xeCJK}
+% ---
+% \usepackage[UTF8]{ctex}
+% \usepackage{xeCJK}
+% \setCJKmainfont{SimSun}
+% ---
+% Pacotes de citações
+%\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+% \usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+% \usepackage{xltxtra}
+\usepackage{fontspec} %Font package
+\usepackage{xunicode}
+%Select fonts
+% \setmainfont[Mapping=tex-text]{Hack Nerd Font}
+% \setsansfont[Mapping=tex-text]{DroidSansMono Nerd Font}
+% \setmonofont{Quivira}
+\newfontfamily\uni[Mapping=tex-text]{Hack Nerd Font}
+% \newenvironment{uni}{\uni}{\par}
+\DeclareTextFontCommand{\unifont}{\uni}
+% Some unicode characters
+% 
+% \newcommand*{\uni}[1]{{\fontsize{12}{12}\fontfamily{}\selectfont \H{#1}}}
+\newfontfamily\ch[Mapping=tex-text]{HAN NOM A} 
+%AR PL UMing CN : light font
+%AR PL UKai TW MBE : drawn font (marked traces)
+\DeclareTextFontCommand{\unifont}{\ch}
+
+% \setmainfont{Source Han Sans CN}
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+\usepackage{graphicx}
+\usepackage{graphics}
+
+\usepackage{fontawesome5} % renderização de unicode
+\usepackage{ucs}
+
+% \usepackage{pythonhlt}%% python highlight
+% \usepackage{bashhlt}  %% shell highlight
+
+% \usepackage{amshmath}
+\usepackage{amsmath}
+
+% \usepackage{droid}
+% \renewcommand{}{}
+% \renewcommand{\ttfamily}{Symbols Nerd Font}
+% \setmonofont{}
+% ---
+% Pacotes adicionais, usados no anexo do modelo de folha de identificação
+% ---
+% \usepackage{multicol}
+% \usepackage{multirow}
+% ---
+
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+% \usepackage{lipsum}				% para geração de dummy text
+% ---
+
+
+% ---
+% CONFIGURAÇÕES DE PACOTES
+% ---
+
+% Enumeração extendível
+\usepackage{enumitem}
+\setlist{nolistsep}
+
+% Caminho dos arquivos-imagem
+\graphicspath{
+  {./Imagens/}
+  {./Imagens/Linux}
+  {./Imagens/WM}
+  {./Imagens/BenchMarks}
+  {./Imagens/Running}
+}
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+  \ifcase #1 %
+  Nenhuma citação no texto.%
+  \or
+  Citado na página #2.%
+  \else
+  Citado #1 vezes nas páginas #2.%
+  \fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Statistics Self-Study module\\
+  \normalsize{Solutions to Master's programme Media and Communication Science in Germany}}
+\autor{Pedro Gomes Branquinho}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+  % pagebackref=true,
+  pdftitle={\@title},
+  pdfauthor={\@author},
+  pdfsubject={\imprimirpreambulo},
+  pdfcreator={Pedro G. Branquinho},
+  pdfkeywords={Statistics}{Python}{Hypothesis}{Testing},
+  colorlinks=true,       		% false: boxed links; true: colored links
+  linkcolor=blue,          	% color of internal links
+  citecolor=blue,        		% color of links to bibliography
+  filecolor=magenta,      		% color of file links
+  urlcolor=blue,
+  bookmarksdepth=4
+}
+\makeatother
+% ---
+
+% ---
+% Espaçamentos entre linhas e parágrafos
+% ---
+
+
+% % O tamanho do parágrafo é dado por:
+\setlength{\parindent}{0.8cm}
+
+% % Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+% \setcounter{chapter}{1}
+\renewcommand\thesection{\arabic{section}}
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+% Seleciona o idioma do documento (conforme pacotes do babel)
+\selectlanguage{english}
+% \selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+% \imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+
+\clearpage
+\section*{Notes}
+\label{sec:org43d1a15}
+\subsection*{The Hypothesis-Testing Process}
+\label{sec:org5272f20}
+\begin{itemize}
+\item Step 1: Restate the Question as a Research Hypothesis.
+\item Step 2: Determine the Characteristics of the Comparison
+Distribution.
+\item Step 3: Determine the Cutoff Sample Score on the Comparison
+Distribution at Which the Null Hypothesis Should Be Rejected.
+\item Step 4: Determine Your Sample’s Score on the Comparison
+Distribution.
+\item Step 5: Decide Whether to Reject the Null Hypothesis.
+\end{itemize}
+\clearpage
+
+
+\section{Exercise 11}
+\label{sec:org5ee5366}
+"For each of the following scatter diagrams, indicate whether the
+pattern is linear, curvilinear, or no correlation; if it is linear,
+indicate whether it is
+
+\href{pic-selected-210731-1700-36.png}{\includegraphics[width=.5\linewidth]{/home/buddhilw/PP/LaTeX/AnaClara/pic-selected-210731-1700-36.png}}
+
+\subsection{Resolution}
+\label{sec:orge33e4e4}
+First, let’s state the equation which defines correlation, by Pearson:
+
+\begin{equation}
+r_{xy} = \dfrac{\sum_{i=1}^n{(x_i - \overline{x}) . (y_i - \overline{y})}}
+{\sqrt{\sum_{i=1}^n{\left(x_{i} - \overline{x}\right)^2}}.\sqrt{\sum_{i=1}^n{\left(y_{i} - \overline{y}\right)^2}}}
+\end{equation}
+
+Or, for a population,
+\begin{equation}
+\rho_{xy} = \dfrac{E[(X - \mu_X)(Y - \mu_Y)]}{\sigma_X \sigma_Y}
+\end{equation}
+
+
+\subsubsection{Pattern (a)}
+\label{sec:orgf5051ab}
+If we were to fit the best line, or curve, there would be for each point an
+approximately an opposite point which would give us an error, regardless
+of the direction of the curve. Therefore, it’s correlation pretty close to 0.
+Because, \(E[(X - \mu_X)] \, \land \, E[(Y - \mu_Y)]\) both tends to zero.
+
+The numerator reminder, being Equation 2,
+\(E[(X - \mu_X)(Y - \mu_Y)] = \lim_{E(X) \to 0, \, E(Y) \to 0}{\left(E[(XY)]-E[X]E[Y]\right)}\)
+
+Which gives us, \(E[(X - \mu_X)(Y - \mu_Y)] = \lim_{E(X) \to 0, \, E(Y)
+\to 0}{\left(E[(XY)]\right)}\).
+
+\(\therefore p \approx 0\).
+
+\subsubsection{Pattern (b)}
+\label{sec:orgfaaa6ee}
+Notation: A is a constant to be tuned.
+
+A fitting-curve can be approximated to \(y(x) = A.x^2\). This pattern is
+quadratic. Also, we are dealing with values \(x > 0\) of our ideal-approximation
+of \(y(x)\). Therefore, the correlation remains high, \(\therefore p \to
+1\) for curvilinear fitting.
+
+\subsubsection{Pattern (C)}
+\label{sec:org41320f4}
+For a given \(x_i\) there are approximately three \(y_j\) corresponding to it. At the
+same time, the \(y_j\) are spaced. But, the overall trend upwards is
+clear, implying p is positive. Therefore, there exist a week correlation,
+estimated about \(0.3 < p < 0.7\).
+
+\subsubsection{Pattern (d)}
+\label{sec:org77b928a}
+For each \(x_i\) there is one clear \(y_i\), and the fitted curve as \(y(x)
+= −A.x\), gives us a almost perfect fit. It's linear and \(p \to -1\).
+
+\subsubsection{Pattern (e)}
+\label{sec:org4a04705}
+Likewise to pattern (a), \(p \to 0\). But, the value would be greater than Pattern
+(a), because the experimental points are closer to each other.
+
+\subsubsection{Pattern (f)}
+\label{sec:org54b76d8}
+The pattern is linear, and it’s absolute value for correlation would
+be less than Pattern (d) and greater than (c). Also, as the trend is
+upwards, the value of \(p\) would be positive.
+\clearpage
+
+\section{Exercise 12}
+\label{sec:org7558ebe}
+As part of a larger study, Speed and Gangestad (1997) colle14cted ratings
+and nominations on a number of characteristics for 66 fraternity men from
+their fellow fraternity members. The following paragraph is taken from their
+\emph{Results} section:
+"men's romantic popularity significantly correlated with several chacteristics: best dressed (r = .47), most self-confident (r = .48), best trend-
+setters (r = .38), funniest (r = .37), most satisfied (r = .32), and most
+independent (r=.28). Unexpectedly, however, men’s potential for
+financial success did not significantly correlate with romantic popularity (r = .10)."
+(p.931)
+
+Explain these results as if you were writing to a person who has never had
+a course in statistics. Specifically, (a) explain what is meant by a correlation
+coefficient using one of the correlations as an example; (b) explain in a general14
+way what is meant by significant and not significant, referring to at
+least one specific example; and (c) speculate on the meaning of the pattern of results,
+
+\subsection{Resolution}
+\label{sec:org8fab578}
+\subsubsection{12(a) - Correlation meaning}
+\label{sec:org503446b}
+Using Pearson’s definition Equation 1, the denominator tends to zero as the mean variable is closer to each data points, which makes \(|r_{xy}|\) grow. That
+is, firstly, correlation measures how far apart data points are.
+
+Secondly, it measures how much a trend can be modeled linearly. That
+is, the mean value always will be on the center of a straight
+line. Therefore, maximizing the even-spacement of each data and the
+value of \(r_{xy}\).
+
+Third, the value is not modularized. Thus \(r_{xy}\) can be both
+negative. It gives a sense it the trend of \(y\) grow as decreases
+as \(x\) increases. A fourth important component, but more technical
+one, is that the Pearson’s value is limited above and below. The value
+being normalized, \(|r_{xy}| < 1\), we can compare the meaning of
+correlation among different sets of measures. e.g., height, age,
+income, etc.
+
+\subsubsection{12(b) - Correlation Significance}
+\label{sec:orgdaf0bdd}
+Correlation significance gives a limited-number, for how predictably
+linear data-behavior is. So, taking the extremes. If \(r_{xy} = 0\) means there is no way
+of telling how an increase in x will result in a increase of decrease of y, while
+modeling the data-behavior by a straight-line. At the other hand, \(r_{xy} = 1\)
+means data behaves exactly as a straight-line. So, an increase in \(\Delta{}x\) means
+an increase in \(\Delta{}y = A.\Delta{}x\) - it’s totally certain that
+this is to be observed for any \(\Delta{x}\).
+
+\subsubsection{12 (c) - Speculation about meaning}
+\label{sec:org488df0a}
+The traits of "good-fitness" to the environment correlates positively with
+female-selection of partners. e.g., well dressed, self-confident, etc. This trend
+is linear, but mid-strong \((0.3 < r < 0.5)\). At the same time, yet another
+heavy measure of "good-fitness" to environment - money -, does not
+strongly correlates to being selected by females.
+
+It could be argued that the social-genetic peer-selection factors haven’t
+had enough time to catch the human trend of using money as a mean of
+attaining high standards of living; but that would be to doubt human
+intelligence. The other plausible explanation could be that \textbf{income}
+being the ultimate social "good-fitness" measure to environment, is
+not linearly correlated to female-selection. Therefore, an increase in
+income by double increases the chance of female-selection by much more
+than the double, and this rate changes as higher the income is.
+\clearpage
+
+\section{Exercise 13}
+\label{sec:org43fe090}
+Gable and Lutz (2000) studied 65 children, 3 to 10 years old, and their
+parents. One of their results was: "Parental control of child eating showed a
+negative association with children’s participation in extracurricular activities
+\((r = - .34; p < .01)\)." Another result as Parents who held less appropriatebeliefs about children’s nutrition reported that their children
+watched more hours of television per day (r = .36; p<.01)." (Both quotes from page 296.***
+14Explain these results as if you were writing to a person who has never had a
+course in statistics. Be sure to comment on possible directions of
+causality for each result.
+
+\subsection{Resolution}
+\label{sec:org3aec9f8}
+\subsubsection{Taking the researches separately}
+\label{sec:org55e6df2}
+These two trends have meaning, wh14en analyzed separately.
+At the same time, an expeculative meaning can be derived analyzing
+them together.
+
+We should note that with a high degree of certainty on
+reproducibility,there exist a trend in both data. e.i., \(p < .01\).
+
+The correlation established says:
+\begin{itemize}
+\item As more control of child eating is exerted, the lesser chance of the chil***p14articipating in extracurricular activity.
+\item Also, the less knowledgeable and careful of child nutrition a parent is,
+\end{itemize}
+
+\subsubsection{Taking them together}
+\label{sec:org015e008}
+
+Together, some hypothesis can be formulated. First, that control of child
+eating can lead to the child spending less time on television and therefore14
+more time on learning. As a consequence, not needing or feeling the need of***articipating in extracurricular activity.
+
+Other hypothesis could be that children who watch more television is
+more prone to participate in extracurricular activity, due to being a greater
+student - which is contra-intuitive to the notion that television’s programsare mostly useless.
+
+More research should be done to explain the relation between child eating
+control, extracurricular activity, television time use, and parent***n14otions around eating.
+\clearpage
+
+\section{Exercise 14}
+\label{sec:org893b163}
+"Suppose you want to conduct a survey of the attitude of psychology
+graduate students studying clinical psychology towards Freudian
+methods of psychotherapy. One approach would be to contact every
+psychology graduate student you know and ask them to fill out a
+questionnaire about. (a) What kind of sampling method is this? (b)
+What is a major limitation of this kind of approach?"
+
+\subsection{Resolution}
+\label{sec:org744daf5}
+\subsubsection{14 (a) Sampling method}
+\label{sec:orgc5882cc}
+It would be a cluster sample. The researcher would be using his
+social-network as the representative population of all graduate
+students studying clinical psychology.
+
+\subsubsection{14 (b) Limitation}
+\label{sec:orgeb30ae6}
+That if these particular students are biased in some way, the conclusions
+could not be applied to any other random population of students. Thus,
+conclusions may only apply to this sample - there lacks variability in
+sample.
+\clearpage
+
+\section{Exercise 15}
+\label{sec:orgcbefbb9}
+"A large study of how people make future plans and its relation to their life
+satisfaction (Prenda \& Clachman, 2001) obtained their participants through
+random-digit dialing procedures These are procedures in which phone num-
+bers to call potential participants are selected at random from all phone
+numbers in a particular country. Explain to a person who has never had a
+course in statistics (a) why this method of sampling might be used,
+and (b) why it may be a problem if not everyone called agreed to be
+interviewed."
+
+\subsection{Resolution}
+\label{sec:org67bef8a}
+\subsubsection{15 (a) Purpose of this sampling method}
+\label{sec:org85a1b07}
+By selecting people at random, is the hole population of a country, there is
+no implicit pattern that could be distinguished for each person. Therefore,
+the results are much more suited to generalization. That is, if the results
+showed a determined trend, it would be safe to say the trend applies to the
+rest of the population - it’s a representative relation.
+
+\subsubsection{15 (b) Problem on certain people not answering the phone}
+\label{sec:org8a7fe99}
+The data may not be suited to generalization, then. Because, this group of
+people could have some common trait of behavior that could effect signifi-
+cantly the measure of a trend on the capacity to "make future
+plans". In general, it would be doubtful if the conclusions arrived
+applied also to the category of people who refused to take random
+calls of strangers.
+\clearpage
+
+\section{Exercise 16}
+\label{sec:orgd1d6101}
+"Suppose that you were going to conduct a survey of visitors to your campus.
+You want the survey to be as representative as possible. How would you
+select the people to survey? Why would that be your best method?"
+
+\subsection{Resolution}
+\label{sec:orge5a04a3}
+The first thing was to find records on people who visited the campus across
+time. If such record existed, the next step would be to randomly select the
+individuals of this list. This way, there would be no bias on the research
+regarding the time these people visited the university; what are their
+age; or the frequency of their visits.
+\clearpage
+
+\section{Exercise 17}
+\label{sec:orga5420ad}
+"Define the following terms in your own words: (a) hypothesis-testing
+procedure, (b) .05 significance level, and (c) two-tailed test."
+
+\subsection{Resolution}
+\label{sec:orgb6bf4e9}
+
+\subsubsection{17(a) Hypothesis-testing}
+\label{sec:orgd0e36c5}
+Hypothesis-testing procedure means the entire process from selecting the
+method to selecting samples, to that of analyzing the data and arriving on a
+conclusion, with a degree of certainty of how representative that hypothesis
+of the general population.
+
+\subsubsection{17(b) .05 significance level}
+\label{sec:org5257661}
+A .05 significance level would be an estimate of how likely that result is
+among samples. So, in this case, out of 100 random samples, we would hope
+that 95 of these would follow the conclusions arrived. And, 5 of them could
+
+\subsubsection{17(c) two-tailed test}
+\label{sec:org6dd253a}
+The two-tailed test can show us if a certain relation, concerning an
+hypothesis, can be of used to understand some aspect of a population
+or not. If the test fails, this means there is some relation among how
+two variables behave themselves, inside the population.
+\clearpage
+
+\section{Exercise 18}
+\label{sec:org7a693ff}
+"List five steps of hypothesis testing and explain the procedure and logic of
+each."
+
+\subsection{Resolution}
+\label{sec:orge64f657}
+\begin{itemize}
+\item Formulating an hypothesis: review the literature on a subject, and for-
+\end{itemize}
+mulate explanations to previously non-explained behavior. Or, choose
+an hypothesis verified in the literature, so to verify if it’s possible to
+replicate the results. State this in mathematical terms.
+\begin{itemize}
+\item Choosing a variable to measure: determine what variable could help
+\end{itemize}
+inquiry into the hypothesis.
+\begin{itemize}
+\item Determine the Cutoff Sample Score on the Comparison Distribution at
+Which the Null Hypothesis Should Be Rejected: determine a sampling
+method that will dictate how representative your conclusion
+is. Also, We should \emph{a priori} know how our cutoff will be done (level of significance).
+\item Determine Your Sample’s Score on the Comparison Distribution:
+quantify our data; use the stablished frame of reference to test our
+data. We have to compute where the actual values lay, regarding cutoffs.
+\item Decide Whether to Reject the Null Hypothesis: based on the score,
+awnser our initial question of the validity of the reaseach hypothesis.
+\end{itemize}
+\clearpage
+
+\section{Exercise 19}
+\label{sec:org5e5bb88}
+"When a result is significant, explain why is it wrong to say the result proves
+the research hypothesis?"
+
+The term proof is used, in the mathematical sense, that some relation
+\textbf{always} holds true. But, in statistics, we measure likelihoods, which imply
+there could be a sample that is so extreme that it falls under a condition
+that the hypothesis do not apply. That is, to use the hypothesis in any
+populations, as true, could turn out to actually be false for some population.
+\clearpage
+
+\section{Exercise 20}
+\label{sec:org197729b}
+"For each of the following:
+\begin{enumerate}
+\item say what two populations are being compared,
+\item state the research hypothesis,
+\item state the null hypothesis, and
+\item say whether you should use a one-tailed or two-tailed test and why. 
+
+\begin{itemize}
+\item In an experiment, people are told to solve a problem by focusing
+on the details. Is the speed of solving the problem different for
+people who get such instructions compared to people who are given
+no special instructions?
+\item Based on anthropological reports in which the status of women is
+scored on a 10-point scale, the mean and standard deviation across
+many cultures are known. A new culture is found in which there is
+an unusual family arrangement. The status of women is also related
+in this culture. Do cultures with the unusual family arrangement
+provide higher status to women than cultures in general?"
+\end{itemize}
+\end{enumerate}
+
+\subsection{Solution}
+\label{sec:org28bceb5}
+\subsubsection{1.1 Told to concentrate}
+\label{sec:org5e4e938}
+\begin{enumerate}
+\item Populations
+\label{sec:org66aa564}
+The populations are:
+\begin{itemize}
+\item People who have been told to focus and solve the problem;
+\item People who haven't been told to focus, only to solve the problem;
+\end{itemize}
+\item Hypothesis
+\label{sec:org9644efd}
+The mean time to solve a problem, when the subjects are told to
+focus is different from when they are not. 
+\item Null Hypothesis
+\label{sec:org20995a9}
+The mean time of both populations are the same.
+\item One or two tailed
+\label{sec:orgd0c2400}
+A two-tailed test is suited. Because we don't suspect if the mean
+time - if different - will be higher or lower, when the
+subjects are told to concentrate.
+\end{enumerate}
+\subsubsection{1.2 Status of women}
+\label{sec:orga270ca1}
+\begin{enumerate}
+\item Populations
+\label{sec:orgc8dfd59}
+The populations are:
+\begin{itemize}
+\item The general population of families across different cultures.
+\item The population with odd family arrangements.
+\end{itemize}
+\item Hypothesis
+\label{sec:org3990cd8}
+The mean status of women in a odd-arrangement family are is
+higher than found on the general orthodox family arrangements.
+\item Null Hypothesis
+\label{sec:orgbbec77d}
+There is no difference in women's mean status between orthodox
+and odd-arranged families.
+\item One or two tailed
+\label{sec:orgca205e7}
+One tailed is best suited. Because we want to know about a
+predetermined difference in observable values. That is, we expect
+that one of them is greater than the other.
+\end{enumerate}
+\clearpage
+
+\section{Exercise 21}
+\label{sec:org5bd70ac}
+"A researcher predicts that listening to music while solving math
+problems will make a particular brain area more active. To test
+this, a research participant has her brain scanned while listening
+to music and solving math problems, and the brain area of interest
+has a percent signal change of 58. From many previous studies with
+the same math-problems procedure (but not listening to music), it is
+known that the signal change in this brain area is normally
+distributed with a mean of 35 and a standard deviation of 10. Using
+the .01 level, what should the researcher conclude? Solve this
+problem explicitly using all five steps of hypothesis testing and
+illustrate your answer with a sketch showing the comparison
+distribution, the cutoff (cutoff), and the score of the sample on
+this distribution. Then explain your answer to someone who has never
+had a course in statistics (but who is familiar with mean, standard
+deviation, and Z scores)."
+
+\subsection{Solution}
+\label{sec:org72df6a5}
+\subsubsection{Population used}
+\label{sec:org8ec838e}
+We have the distribution data of people who solved math problems
+and their increase in brain activity. But not of people who was
+both listening music and resolving math problems. Therefore, we
+will use this population as out control-population.
+
+\subsubsection{State the research hypothesis}
+\label{sec:orgad80b0b}
+The increase in the value of increased brain-activity found in the
+study-case is relevantily higher than the mean value of increase
+of people solving math problems, without music (\(\alpha{}=0.01\)). 
+
+\subsubsection{State the null hypothesis}
+\label{sec:org34dc7bb}
+The value observed is not as significant. That is,
+\(H_0: \, p > \alpha\)
+
+\subsubsection{Computing the p-value}
+\label{sec:org2ff0d93}
+
+Using Python's statistics scientific library scipy.stats,
+\begin{verbatim}
+from scipy.stats import norm
+\end{verbatim}
+
+The cumulative distribution function (CDF), given by
+
+  \begin{equation}
+\textrm{norm.cdf}(x,\mu ,\sigma )=\int_{-\infty}^{x}{\dfrac{e^{-\frac{1}{2}\left(\frac{\xi{}-\mu{}}{\sigma{}}\right)^2}}{\sigma{}\sqrt{2\pi}}}
+  \end{equation}
+
+Which means the area under the curve until the value \(x\), the
+observable variable under comparison.
+
+Therefore, the p-value is the \(\texrm{p_{value}}=1-\textrm{norm.cdf}\)
+\begin{verbatim}
+print(1 - norm.cdf(45, 35, 10))
+\end{verbatim}
+
+\textbf{RESULTS:}
+0.15865525393145707
+\subsubsection{Conclusion}
+\label{sec:orgeb01823}
+\(\therefore p_{value}>0.01\), we don't reject \(H_0\). The value found
+do not support the thesis that listening music further increases the
+activation of the brain activity in the determined area any more
+than just resolving mathematical problems.
+\subsubsection{Graphic}
+\label{sec:org1ffca0d}
+\begin{enumerate}
+\item Find cutoff
+\label{sec:orgc525d48}
+Finding \(x\) such that \(p(x)=\alpha\),
+\begin{verbatim}
+print(1 - norm.cdf(58.2633, 35, 10))
+\end{verbatim}
+
+\textbf{RESULTS:} 
+0.010000476391382573
+
+Therefore, the \textbf{cutoff} is at \(x=58.2633\).
+
+\item Plot with cutoff and the presented value under the Normal
+\label{sec:org46a09d6}
+\begin{verbatim}
+import numpy as np
+import matplotlib.pyplot as plt
+
+#x-axis ranges from 20 and 50 with .001 steps
+x = np.arange(10, 60, 0.001)
+
+#define normal values (not normalized)
+plt.plot(x, norm.pdf(x, 35, 10), label='μ: 35, σ: 10', color='k')
+plt.vlines(x = 45.0, ymin=0, ymax=norm.pdf(45, 35, 10), colors = 'green', label = 'Case value') 	
+plt.vlines(x = 58.2633, ymin=0, ymax=norm.pdf(58.2633, 35, 10), colors = 'red', label = 'Cutoff') 	
+
+# Grid on
+plt.grid(True)
+# Title
+plt.title('Study-case data comparison to Cutoff')
+# Axis titles
+plt.xlabel('Brain activity')
+plt.ylabel('Probability')
+#add legend to plot
+plt.legend()
+\end{verbatim}
+
+\textbf{RESULTS:}
+ \begin{center}
+\includegraphics[width=.9\linewidth]{../ein-images/ob-ein-a1a029700f2bb435bea76544f589baa8.png}
+\end{center}
+\end{enumerate}
+\clearpage
+
+\section{Exercise 22}
+\label{sec:org8390767}
+"In an article about anti-tobacco campaigns, Siegel and Biener (1997)
+discuss the results of a survey of tobacco usage and attitudes,
+conducted in Massachusetts in 1993 and 1995; Table 6-2 shows the
+results of this survey. Focusing on just the first line (the
+percentage smoking >25 cigarettes daily), explain what this 
+result means to a person who has never had a course in
+statistics. (Focus on the meaning of this result in terms of the
+general logic of hypothesis testing and statistical significance."
+
+\href{AnaClara/tabacco.png}{\includegraphics[width=.9\linewidth]{/home/buddhilw/PP/LaTeX/AnaClara/tabacco.png}}
+
+\subsection{Solution}
+\label{sec:orgf9b726e}
+Twenty five cigarettes are not as extreme a value as to say it
+would be rare to find a people on the general population that
+smoked more cigarettes than that daily. To consider a value to be
+rare to be found in a population, the percentage value have to be
+lesser than \(5\%\).
+\clearpage
+
+\section{Exercise 23}
+\label{sec:org44e8f95}
+"Define alpha and beta."
+
+\subsection{Solution}
+\label{sec:orga777c95}
+Alpha decreases, when we increase the Confidence Level we want to
+scrutinize our test. So, the lower we set Alphas, the harder
+is to have false positives (type I error) passing our test. 
+
+Beta is how much, percentage wise, we would accept to wrongly
+categorize data that collaborate to the alternative hypothesis. That
+is, how much false negatives (type II error) we are willing to commit,
+so to preserve our null hypothesis. 
+\clearpage
+
+\section{Exercise 24}
+\label{sec:orga70acb9}
+"In a planned study, there is a known population with a normal
+distribution, \(\mu = 15,\, \sigma = 2\). What is the predicted mean if researchers
+predict
+
+\begin{itemize}
+\item A small positive effect size,
+\item A medium negative effect size,
+\item a large positive effect size,
+\item An effect of d = .35, and
+\item An effect size of d = -1.5?"
+\end{itemize}
+
+\subsection{Solution}
+\label{sec:org8a6f651}
+\subsubsection{Mathematical translation of terms}
+\label{sec:org7959ea8}
+Cohen and Sawilosky's suggestions are of
+
+\begin{center}
+\begin{tabular}{lr}
+\hline
+Effect size & d\\
+\hline
+Very Small & 0.01\\
+Small & 0.20\\
+Medium & 0.50\\
+Large & 0.80\\
+Very large & 1.20\\
+Huge & 2.0\\
+\hline
+\end{tabular}
+\end{center}
+
+
+The general d-value is computed as \(d=\dfrac{|\overline{x_1} -
+    \overline{x_2}|}{s}\), for which we will use the values of \(x_1=15
+    \, \land \, s=2\).
+
+Generally, we have \(\overline{x_2}=\overline{x_1} \pm s.(d)\)
+
+\subsubsection{Predicting the means}
+\label{sec:org7ede81f}
+Therefore, consulting the table for the \(d\) values, 
+\begin{enumerate}
+\item Small positive effect size
+\label{sec:org5cc07d9}
+\(\implies \overline{x_2}=15.4\).
+
+\item Medium negative effect size
+\label{sec:orga33908c}
+\(\implies \overline{x_2}=\overline{x_1} - s.(d) \, \Leftrightarrow \, \overline{x_2}=14\)
+
+\item A large positive effect size
+\label{sec:org4b972fd}
+\(\implies \overline{x_2}=\overline{x_1} + s.(d) \, \Leftrightarrow \, \overline{x_2}=16.6\)
+
+\item An effect of d=.35,
+\label{sec:org1b20989}
+\(\implies \overline{x_2}=\overline{x_1} + s.(d) \,
+     \Leftrightarrow \,
+     \overline{x_2}=15.70\)
+
+\item An effect of d=-1.5
+\label{sec:org957287f}
+\(\implies \overline{x_2}=\overline{x_1} - s.(d) \, \Leftrightarrow \, \overline{x_2}=12\)
+\end{enumerate}
+\clearpage
+
+\section{Exercise 25}
+\label{sec:org33e2cef}
+"Based on a particular theory of creativity, a psychologist predicts
+that artists will be greater risk takers than the general
+population. The general population is normally distributed with a
+mean of 50 and a standard   deviation of 12 on the risk-taking
+questionnaire this psychologist plans to use. The psychologist
+expects that  artists will score, on the average, 55 on this
+questionnaire. The psychologist plans to study 36 artists and test
+the hypothesis at the .05 level.  
+
+\begin{itemize}
+\item What is the power of this study?
+\item Sketch the distributions involved, showing the area for alpha, beta, and power.
+\item Explain your answer to someone who understands hypothesis testing with means of samples but has
+\end{itemize}
+never learned about power."
+
+\subsection{Solution}
+\label{sec:orga3c08cd}
+We will be using \href{https://www.statsmodels.org/dev/generated/statsmodels.stats.power.TTestIndPower.html}{statsmodels.stats.power.TTestIndPower}, a library por Power Analysis in Python.
+
+\begin{verbatim}
+import statsmodels.stats.power as tt
+\end{verbatim}
+
+But, under the hood we are considering a Z-statistic, of the following form:
+  \begin{equation}
+\begin{aligned}
+Z = \dfrac{\overline{X}-\mu_{1}}{\left(\dfrac{\sigma{}}{\sqrt{n}}\right)}
+\end{aligned}
+\end{equation}
+
+In which,
+\begin{equation}
+  \begin{align}
+\begin{cases}
+    \overline{X} &: \textrm{The mean proposed in the hypothesis}\\
+    \mu_{1} &: \textrm{The given mean}\\
+    \sigma{} &: \textrm{The given deviation}\\
+    \sqrt{n} &: \textrm{The size of the tested population}\\
+\end{cases}
+  \end{align}
+\end{equation}
+
+\subsubsection{What is the power of this study?}
+\label{sec:orgea0b1d5}
+Let effect-size be our already defined \(d\).
+
+\begin{verbatim}
+# difference in means divided by the standard deviation
+effect_size = (55 - 50)/12
+# number of observations
+n_obs = 36
+# alternative hypothesis: larger mean
+alt = 'larger'
+# alpha: .05 level
+alpha= 0.05
+
+## Calling the solver for power
+tt.tt_ind_solve_power(effect_size=effect_size, nobs1=n_obs, alternative=alt, alpha=alpha)
+\end{verbatim}
+
+\textbf{RESULTS:}
+The power is of 54.
+
+\subsubsection{Sketch the distributions involved, showing the area for alpha, beta, and power.}
+\label{sec:org5b6f5f7}
+\begin{verbatim}
+from scipy.stats import norm
+import numpy as np
+import matplotlib.pyplot as plt
+\end{verbatim}
+
+\begin{enumerate}
+\item Finding the cutoff (try and error)
+\label{sec:org1ebd41a}
+\begin{verbatim}
+print(1 - norm.cdf(69.7, 50, 12))
+\end{verbatim}
+
+\textbf{Results:}
+0.05032955164661035
+
+\item Sketch two distributions
+\label{sec:org822fbff}
+\begin{verbatim}
+#x-axis
+x = np.arange(20, 95, 0.001)
+
+#define normal values (not normalized)
+plt.plot(x, norm.pdf(x, 50, 12), label='μ: 50, σ: 12', color='k')
+plt.plot(x, norm.pdf(x, 55, 12), label='μ: 55, σ: 12', color='violet')
+plt.vlines(x = 69.7, ymin=0, ymax=norm.pdf(69.7, 55, 12), colors = 'red', label = '"beta"-Cutoff') 	
+plt.vlines(x = 69.7, ymin=0, ymax=norm.pdf(69.7, 50, 12), colors = 'blue', label = '"alpha"-Cutoff') 	
+
+# # Grid on
+plt.grid(True)
+# Title
+plt.title('Two normal populations - difference on skewed mean')
+# Axis titles
+plt.xlabel('Risk')
+plt.ylabel('Probability')
+#add legend to plot
+plt.legend()
+\end{verbatim}
+\begin{center}
+\includegraphics[width=.9\linewidth]{ein-images/ob-ein-a424b2f89ceb3014e785f5e69cb79ace.png}
+\end{center}
+
+\begin{itemize}
+\item The area under the blue - alpha-cutoff - of the \(N(\mu{}=50,\sigma{}=12)\), from x=69.7 to positive-infinity will be the I-type error commited (\(\alpha{}\)).
+\item The area under the red - beta-cutoff - of the \(N(\mu{}=55,\sigma{}=12)\), from x=69.7 to negative-infinity will be the II-type error commited (\(\beta{}\)).
+\end{itemize}
+
+\item Sketch Z distribution and Power
+\label{sec:org29301d1}
+
+Calculating z such P(Z>z)=1-P(Z<z)=0.54. That is, P(Z<z)=0.46
+\begin{verbatim}
+norm.cdf(4.80, 5, (12/np.sqrt(36)))
+\end{verbatim}
+
+\textbf{RESULTS:} 
+0.46
+
+So, z=0.46. This will be used to plot the cutoff region for understanding Power.
+
+\begin{verbatim}
+#x-axis
+x = np.arange(0, 10, 0.001)
+
+#define normal values (not normalized)
+plt.plot(x, norm.pdf(x, 5, (12/np.sqrt(36))), label='Δμ: 5, σ: 12/√(36)', color='k')
+plt.vlines(x = 4.80, ymin=0, ymax=norm.pdf(4.80, 5, (12/np.sqrt(36))), colors = 'blue', label = 'power-Cutoff') 	
+
+# # Grid on
+plt.grid(True)
+# Title
+plt.title('Z distribution')
+# Axis titles
+plt.xlabel('Mean-difference')
+plt.ylabel('Probability')
+#add legend to plot
+plt.legend()
+\end{verbatim}
+\begin{center}
+\includegraphics[width=.9\linewidth]{ein-images/ob-ein-c7c8585d6423214f9ddc917dba4275f8.png}
+\end{center}
+
+The area above the power-Cutoff line adds up to 0.54. This is the power of our data.
+\end{enumerate}
+
+\subsubsection{Explain your answer to someone who knows Hypothesis testing (\ldots{})}
+\label{sec:org8d5b35c}
+
+We would need to increase the number of artists test to make the
+results relevante. This in case if they indeed follow the hypothesized
+increase in mean.
+
+As the data is presented, we would be having a likelehood of 46\% of
+misinterpreting out data. That is, if we ended up rejecting \(H_0\),
+only 56\% of those deviant data would, for certain, be due to a
+skewed-distribution-behavior.
+\clearpage
+
+\section{Exercise 26}
+\label{sec:org9fd60dc}
+"You read a study that just barely fails to be significant at the .05
+level. That is, the result is not significant. You then look at the
+size of the sample. If the sample is very large (rather than very
+small), how should this affect your interpretation of:
+
+\begin{itemize}
+\item The probability that the null hypothesis is actually true, and
+\item The probability that the null hypothesis is actually false?"
+\end{itemize}
+
+\subsection{Solution}
+\label{sec:org2fcec28}
+
+If the sample is very large, the Center Limit Theorem (CLT) says
+the distribution should become a normal bell-curve.
+
+\subsubsection{The probability \(H_0\) actually true}
+\label{sec:org983d9c0}
+Then, this barely measurable difference won't change, when we
+increase even more the sample size. The result will very likely
+stay in the "not significant" category. Low probability of being
+false.
+
+\subsubsection{The probability \(H_0\) actually false}
+\label{sec:org7e86de6}
+Just the opposite of the true case, the likelihood that 
+\clearpage
+
+\section{Exercise 27}
+\label{sec:org3815e9d}
+"You are planning a study that you compute as having quite low
+power. Name five things that you might do to increase power."
+
+\subsection{Solution}
+\label{sec:orgd3215a1}
+\begin{itemize}
+\item Number of experiments (\(n\)).
+\item Change the effect size under hypothesis.
+\item Reframe the hypothesis to other values (\(\mu\)).
+\item Compute the values to different \(\alpha\).
+\item Change the alternative hypothesis.
+\end{itemize}
+\clearpage
+
+\section{Exercise 28}
+\label{sec:org25219c3}
+"Evolutionary theories often emphasize that humans have adapted to
+their physical environment. One such
+theory hypothesizes that people should spontaneously follow a 24-hour
+cycle of sleeping and waking even
+if they are not exposed to the usual pattern of sunlight. To test this
+notion, eight paid volunteers were placed
+(individually) in a room in which there was no light from the outside
+and no clocks or other indications of
+time. They could turn the lights on and off as they wished. After a
+month in the room, each individual tended
+to develop a steady cycle. Their cycles at the end of the study were
+as follows: 25, 27, 25, 23, 24, 25, 26, and 25.
+
+Using the 5\% level of significance, what should we conclude about the
+theory that 24 hours is a natural cycle? (That is, does the average
+cycle length under these conditions differ significantly from 24
+hours?)
+\begin{itemize}
+\item Use the steps of hypothesis testing.
+\item Sketch the distributions involved.
+\item Explain your answers to someone who has never taken a course in
+statistics."
+\end{itemize}
+
+\subsection{Solution}
+\label{sec:org06c20df}
+\subsubsection{28(a) Hypothesis testing steps}
+\label{sec:org6e811f6}
+\begin{itemize}
+\item Step 1: Restate the Question as a Research Hypothesis.
+\item Step 2: Determine the Characteristics of the Comparison
+Distribution.
+\item Step 3: Determine the Cutoff Sample Score on the Comparison
+Distribution at Which the Null Hypothesis Should Be Rejected.
+\item Step 4: Determine Your Sample’s Score on the Comparison
+Distribution.
+\item Step 5: Decide Whether to Reject the Null Hypothesis.
+\end{itemize}
+
+\begin{enumerate}
+\item S1: Nondirectional
+\label{sec:org5056313}
+The mean day-time cycle found in people devoided of light and
+timers is not the same as the the general population.
+\(H_0:X-25 = 0 \quad H_1:X-25 \neq 0\).
+
+\item S2: p-values and t-statistic
+\label{sec:org20ccca7}
+\begin{enumerate}
+\item Theoretical discussion
+\label{sec:org5ff0b54}
+We will be using a One-Sample T-Test. Because there is few measures of a sample, and we have a hypothesized mean to compare.
+
+So,
+\begin{itemize}
+\item \(\mu_0=24.0\)
+\item \(M = 25.0\)
+\item \(\sigma_1=1.2\)
+\item \(n=7\)
+\end{itemize}
+
+We could derive all relevant factors by hand, in this case:
+\begin{itemize}
+\item \(S^2_\textrm{pooled}= \dfrac{\sigma^2}{n-1}\)
+\item \(S_M=S_{\textrm{pooled}}\)
+\item \(t=\dfrac{M - \mu_0}{S_M}\)
+\end{itemize}
+But, we will use the already implemented libraries, so there is no mistake.
+
+\item Numerical libraries
+\label{sec:org8bd8ffe}
+Using the numerical library and the scientific libraries in Python,
+\begin{verbatim}
+import numpy as np
+import scipy.stats as st
+\end{verbatim}
+
+Thankfully, Python has an already implemented modulus to test this kind of hypothesis
+\begin{verbatim}
+# State the data
+data = [25,27,25,23,24,25,26]
+# The hypothesized population mean - 24 hours cycles
+popmean = 24.0
+
+tStat, pValue =  st.ttest_1samp(data, popmean, axis=0)
+print("P-Value:{0:.2f} T-Statistic:{1:.2f}".format(pValue,tStat)) #print the P-Value and the T-Statistic
+
+#       print("mean: {0:.2f}; standard deviation: {1:.2f}; S_pooled= {2:.2f}" .format(mean,std,s_pool,sm1))
+\end{verbatim}
+
+\textbf{RESULTS:}
+P-Value: 0.09 T-Statistic: 2.05
+\end{enumerate}
+
+\item S3: Cutoff
+\label{sec:org5c0acd5}
+We will test mean differences for different populations. Also,
+we'll use \(\alpha = 0.05\). As it's nondirectional, \(\alpha_{\pm\frac{1}{2}}=0.025\).
+\item S4: Comparison to our data
+\label{sec:org43d694c}
+We had that the p-value = 0.09. As \(p_{\textrm{value}}>\dfrac{\alpha}{2}\)  (nondirectional) we fail to reject \(H_0\).
+We could also consult a table with \(t_{0.975, 7}=2.365\). As the actual t, \(t<t_{0.975, 7}\) then we don't reject \(H_0\).
+
+\item S5: Conclusion
+\label{sec:orgb154445}
+So, the means of the populations are, in fact, the same, under our test and scrutiny. There is evidence to collaborate with the evolutionary theory of a 24h day cycle for humans.
+\end{enumerate}
+
+\subsubsection{28(b) Sketch the distributions involved}
+\label{sec:org81b236b}
+\begin{verbatim}
+from scipy.stats import norm
+import numpy as np
+import matplotlib.pyplot as plt
+\end{verbatim}
+\begin{enumerate}
+\item Finding the cutoff (try and error)
+\label{sec:org7cb3402}
+\begin{verbatim}
+print(1 - norm.cdf(26.35, 24, 1.2), norm.cdf(21.65, 24, 1.2))
+\end{verbatim}
+
+\item Sketch two distributions
+\label{sec:orge5cece7}
+\begin{verbatim}
+#x-axis
+x = np.arange(18, 30, 0.001)
+
+#define normal values (not normalized)
+plt.plot(x, norm.pdf(x, 24, 1.2), label='μ: 24, σ: 1.2', color='k')
+plt.plot(x, norm.pdf(x, 25, 1.2), label='μ: 25, σ: 1.2', color='blue')
+plt.vlines(x = 21.65, ymin=0, ymax=norm.pdf(21.65, 24, 1.2), colors = 'red', label = '"alpha/2"-Cutoff') 	
+plt.vlines(x = 26.35, ymin=0, ymax=norm.pdf(26.35, 24, 1.2), colors = 'red', label = '"alpha/2"-Cutoff') 	
+
+# # Grid on
+plt.grid(True)
+# Title
+plt.title('Two normal populations - difference on skewed mean')
+# Axis titles
+plt.xlabel('Risk')
+plt.ylabel('Probability')
+#add legend to plot
+plt.legend()
+\end{verbatim}
+\begin{center}
+\includegraphics[width=.9\linewidth]{ein-images/ob-ein-1bb6325678a717b7b9bb0c7a1b652287.png}
+\end{center}
+\end{enumerate}
+
+\subsubsection{28(c) Explain your answer to someone who has never taken a course in statistics}
+\label{sec:org493cc7f}
+
+The results found support the theory. \emph{A priori} to the test, we choose that we would only accept an alternative explanation if the tests showed that the results are so different from the expected that if we were to repeat them one hundred times and only would get five as extreme results at random or less.
+
+In the research, we found that we would get nine false positives out of one hundred, at random. So, the results are not convincing enough to disprove the theory. 
+\clearpage
+
+\section{Exercise 29}
+\label{sec:org0f63a88}
+"Five people who were convicted of speeding were ordered by the court to attend a workshop. A special
+device put into their cars kept records of their speeds for 2 weeks before and after the workshop. The
+maximum speeds for each person during the 2 weeks after the workshop follow.
+
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Participant & Before & After\\
+\hline
+L.B. & 65 & 58\\
+J.K. & 62 & 65\\
+R.C. & 60 & 56\\
+R.T. & 70 & 66\\
+J.M. & 68 & 60\\
+\hline
+\end{tabular}
+\end{center}
+Using the 5\% significance level, should we conclude that people are likely to drive more slowly after such a
+workshop?
+(a) Use the steps of hypothesis testing.
+(b) Sketch the distributions involved.
+(c) Explain your answer to someone who is familiar with hypothesis testing involving known populations,
+but has never learned anything about t-tests."
+
+\subsection{Solution}
+\label{sec:org8f4a319}
+\subsubsection{29(a) Hypothesis testing steps}
+\label{sec:org1ee6c77}
+\begin{itemize}
+\item Step 1: Restate the Question as a Research Hypothesis.
+\item Step 2: Determine the Characteristics of the Comparison
+Distribution.
+\item Step 3: Determine the Cutoff Sample Score on the Comparison
+Distribution at Which the Null Hypothesis Should Be Rejected.
+\item Step 4: Determine Your Sample’s Score on the Comparison
+Distribution.
+\item Step 5: Decide Whether to Reject the Null Hypothesis.
+\end{itemize}
+
+\begin{enumerate}
+\item S1: Directional
+\label{sec:org949a993}
+P1: Before the workshop
+P2: After the workshop
+     \begin{equation}
+\begin{aligned}
+\begin{cases}
+H_0&: \overline{X_{\textrm{After}}}- \overline{X_{\textrm{Before}}}=0 \\
+H_1&: \overline{X_{\textrm{After}}}-\overline{X_{\textrm{Before}}}<0
+\end{cases}
+\end{aligned}
+\end{equation}
+\item S2: p-values and paired t-statistic
+\label{sec:org16a5989}
+\begin{enumerate}
+\item Theoretical discussion
+\label{sec:org3aa27c7}
+We will be using a Paired T-Test. Because there is few measures of a sample, and we have a same population being tested in two different points in time. 
+
+So, we have:
+\begin{itemize}
+\item \(\overline{X_{\textrm{After}}}\)
+\item \(\overline{X_{\textrm{Before}}}\)
+\item \(t = \dfrac{\Delta \overline{X}}{S_D/\sqrt{n}}\)
+\item \(n=5\)
+\end{itemize}
+
+We will use the already implemented libraries, so there is no mistake.
+
+\item Numerical libraries
+\label{sec:orgd1776b5}
+Using the numerical library and the scientific libraries in Python,
+\begin{verbatim}
+import numpy as np
+import scipy.stats as st
+\end{verbatim}
+
+\begin{verbatim}
+# State the data
+data_before =[65,62,60,70,68]
+data_after = [58,65,56,66,60]
+
+tStat, pValue =  st.ttest_rel(data_before,data_after)
+print("P-Value:{0:.2f} T-Statistic:{1:.2f}".format(pValue,tStat)) 
+\end{verbatim}
+
+\textbf{RESULTS:}
+P-Value: 0.11 T-Statistic: 2.08
+\end{enumerate}
+
+\item S3: Cutoff
+\label{sec:orgca37325}
+We will test mean differences for the same population. Also,
+we'll use \(\alpha = 0.05\). As it's directional.
+
+\(t_{(0.95,4)}=2.132\). If the absolute value of the test statistic is greater than the critical value (0.95), then we reject the null hypothesis.
+
+\item S4: Comparison to our data
+\label{sec:orgbaeccbc}
+We had that the p-value = 0.11. As \(p_{\textrm{value}}>\alpha\)  (directional) we fail to reject \(H_0\). Also, we could compare \(t_{\textrm{obtained}}\) and compare to see that as \(t_{\textrm{obtained}}=2.08<t_{(0.95,4)}=2.132\) then we fail to reject the null hypothesis.
+\item S5: Conclusion
+\label{sec:orga6ebe4c}
+So, the means of the populations are, in fact, the same, under our test and scrutiny. There is evidence that the mean velocities do not observe a decrease after the subjects go through the workshop.
+\end{enumerate}
+
+\subsubsection{29(b) Sketch the distributions involved.}
+\label{sec:orgc7c4a08}
+\begin{enumerate}
+\item Work with the data
+\label{sec:orgf324d0e}
+\begin{verbatim}
+from scipy.stats import norm
+import numpy as np
+import matplotlib.pyplot as plt
+
+data_before =[65,62,60,70,68]
+data_after = [58,65,56,66,60]
+
+mean_before = np.mean(data_before)
+mean_after = np.mean(data_after)
+std_before = np.std(data_before)
+std_after = np.std(data_after)
+
+\end{verbatim}
+
+\item Sketch the two distributions
+\label{sec:orgc6e6e77}
+\begin{verbatim}
+#x-axis
+x = np.arange(45, 80, 0.001)
+
+# 65.0 3.687817782917155 61.0 3.8987177379235853
+
+#define normal values (not normalized)
+plt.plot(x, norm.pdf(x, mean_before, std_before), label='μ: 65.0, σ: 3.69', color='k')
+plt.plot(x, norm.pdf(x, mean_after, std_after), label='μ: 61.0, σ: 3.90', color='blue')
+# plt.vlines(x = 21.65, ymin=0, ymax=norm.pdf(21.65, 24, 1.2), colors = 'red', label = '"alpha/2"-Cutoff') 	
+# plt.vlines(x = 26.35, ymin=0, ymax=norm.pdf(26.35, 24, 1.2), colors = 'red', label = '"alpha/2"-Cutoff') 	
+
+# # Grid on
+plt.grid(True)
+# Title
+plt.title('Two normal populations - difference on skewed mean')
+# Axis titles
+plt.xlabel('Max Speed')
+plt.ylabel('Probability')
+#add legend to plot
+plt.legend()
+\end{verbatim}
+\begin{center}
+\includegraphics[width=.9\linewidth]{ein-images/ob-ein-f57685b6f73a6810b0e630b3208f127f.png}
+\end{center}
+\end{enumerate}
+
+\subsubsection{29(c) Explain your answer to someone who knows hypothesis testing}
+\label{sec:org06bb5fe}
+
+The results found support that there is no measurable difference
+before and after the educational workshop. The p-value was 0.11, when
+we \emph{a priori} have set it to p-critical = 0.05.
+
+This p-value is derived from a statistic pretty similar to the
+Z-statistic, but with estimated mean and variance. Also, the fact that
+the population is the same is also considered into the statistic.
+
+Therefore, the results are not convincing enough to prove the workshop
+is, in fact, effecient.
+\clearpage
+
+\section{Exercise 30}
+\label{sec:orga0c183f}
+"For each of the following studies, say whether you would use a t-test for dependent means or a t-test for
+independent means.
+(a) A researcher randomly assigns a group of 25 unemployed workers to receive a new job-skills program
+and 24 other workers to receive the standard job-skills program, and
+then measures how well they all do on a job-skills test.
+(b) A researcher measures self-esteem in 21 students before and after taking a difficult exam.
+(c) A researcher tests reaction time of each of a group of 14
+individuals twice, once while in a very hot room and once in a
+normal-temperature room."
+\subsection{Solution}
+\label{sec:orgfa65e42}
+\subsubsection{30 (a)}
+\label{sec:org1fc36f1}
+A independent, paired, t-test would be proper. The populations are
+choosen at random and have no relation to each other
+\subsubsection{30 (b)}
+\label{sec:orgf42723e}
+A dependent t-test would be proper. Because we are measuring the same
+variables, whitin the same population, in two distinctic points in
+time.
+\subsubsection{30 (c)}
+\label{sec:orgc669c29}
+A dependent t-test because the same population is being compared in
+two different circunstance.
+\clearpage
+
+\section{Exercise 31}
+\label{sec:orgb16ea17}
+"Figure SDifference for each of the following studies:
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline
+ & N1 & S²1 & N2 & S²2\\
+\hline
+a. & 30 & 5 & 20 & 4\\
+\hline
+b. & 30 & 5 & 30 & 4\\
+\hline
+c. & 30 & 5 & 50 & 4\\
+\hline
+d. & 20 & 5 & 30 & 4\\
+\hline
+e. & 30 & 5 & 20 & 2\\
+\hline
+\end{tabular}
+\end{center}
+\subsection{Solution}
+\label{sec:org23d988a}
+We are given \((N_1,\, S^2_1,\, N_2,\, S^2_2)_i\) for \(i \in
+\{a,b,c,d,e\}\).
+
+We know that
+\begin{equation}
+\begin{aligned}
+\begin{cases}
+df_{\textrm{Total}} = \sum_{i=0}^n{df_i}\\
+df_i=N_i-1\\
+S^2_{Pooled}&=\dfrac{df_1}{df_{\textrm{Total}}}\left(S^2_1\right)+\dfrac{df_2}{df_{\textrm{Total}}}\left(S^2_2\right) \\
+S^2_{M_1}&=\dfrac{S^2_{Pooled}}{N_1}\\
+S^2_{M_2}&=\dfrac{S^2_{Pooled}}{N_2}\\
+S^2_{\textrm{Difference}}&=S^2_{M1}+S^2_{M2} \Leftrightarrow S_{\textrm{Difference}}=\sqrt{S^2_{M1}+S^2_{M2}}
+\end{cases}
+\end{aligned}
+\end{equation}
+
+\subsubsection{Python program to automate the problem}
+\label{sec:orgfd273eb}
+We will create a python function to solve the problem
+\begin{verbatim}
+def calc_Sdiff(N1,S1_sqd,N2,S2_sqd):
+    Spooled_sqd=((N1-1)/(N1+N2-2))*S1_sqd + ((N2-1)/(N1+N2-2))*S2_sqd
+    Sm1_sqd=Spooled_sqd/N1
+    Sm2_sqd=Spooled_sqd/N2
+    Sdiff=np.sqrt(Sm1_sqd+Sm2_sqd)
+    print(Sdiff)
+\end{verbatim}
+
+\subsubsection{31(a)}
+\label{sec:org1ebb408}
+\begin{verbatim}
+calc_Sdiff(30,5,20,4)
+\end{verbatim}
+
+\textbf{RESULTS:}
+0.62
+
+\subsubsection{31(b)}
+\label{sec:orgdd0f189}
+\begin{verbatim}
+calc_Sdiff(30,5,30,4)
+\end{verbatim}
+
+\textbf{RESULTS:}
+0.55
+
+\subsubsection{31(c)}
+\label{sec:orgea2901e}
+\begin{verbatim}
+calc_Sdiff(30,5,50,4)
+\end{verbatim}
+
+\textbf{RESULTS:}
+0.48
+
+\subsubsection{31(d)}
+\label{sec:org3d363f7}
+\begin{verbatim}
+calc_Sdiff(20,5,30,4)
+\end{verbatim}
+
+\textbf{RESULTS:}
+0.61
+
+\subsubsection{31(e)}
+\label{sec:orgad5bde2}
+\begin{verbatim}
+calc_Sdiff(30,5,20,2)
+\end{verbatim}
+
+\textbf{RESULTS:}
+0.56
+\clearpage
+
+\section{Exercise 32}
+\label{sec:orgac8fd16}
+"For each of the following experiments, decide if the difference between conditions is statistically significant
+at the .05 level (two-tailed).
+\begin{center}
+\begin{tabular}{lrrrrrr}
+\hline
+ &  & Experimental Group &  &  & Control Group & \\
+\hline
+ & N & M & s² & N & M & s²\\
+(a) & 10 & 604 & 60 & 10 & 607 & 50\\
+(b) & 40 & 604 & 60 & 40 & 607 & 50\\
+(c) & 10 & 604 & 20 & 40 & 607 & 16\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Solution}
+\label{sec:org7f10268}
+The general formula for \(t\) is:
+
+\begin{equation}
+\begin{aligned}
+t=\dfrac{M_1 - M_2}{\sqrt{\dfrac{(N_1 - 1)(S^2_1) + (N_2 - 1)(S^2_2)}{N_1+N_2-2}\left(\dfrac{1}{N_1}+\dfrac{1}{N_2}\right)}}
+\end{aligned}
+\end{equation}
+
+Let's create a Python algorithm for this.
+
+We will also take \(|t|\) and consider the
+\(t_{\nu,0.975}=-t_{\nu,0.025}\) (two-sided).
+
+\begin{verbatim}
+def t_calc(N1,M1,S1_sqrd,N2,M2,S2_sqrd):
+    df_total=N1+N2-2
+    std1 = ((N1-1)*S1_sqrd)/df_total
+    std2 = ((N2-1)*S2_sqrd)/df_total
+    rev_mean = (1/N1 + 1/N2) 
+    t=(M1-M2)/np.sqrt((std1+std2)*rev_mean)
+
+    print(abs(t))
+\end{verbatim}
+
+\subsubsection{32 (a)}
+\label{sec:org330a5a5}
+\begin{verbatim}
+t_calc(10,604,60,10,607,50)
+\end{verbatim}
+
+\textbf{RESULTS:}
+0.90
+
+Taking the value of \(t_{18,0.975}=2.101\) on a table.
+
+As \(t_{observed}<t_{18,0.975}\), It's not statistically significant.
+
+\subsubsection{32 (b)}
+\label{sec:org7ebdab0}
+\begin{verbatim}
+t_calc(40,604,60,40,607,50)
+\end{verbatim}
+
+\textbf{RESULTS:}
+1.81
+
+Taking the value of \(t_{78,0.975}\approx t_{80,0.975}=1.990\) on a table.
+
+As \(t_{observed}<t_{78,0.975}\), It's not statistically significant. Yet
+closer than last test.
+
+\subsubsection{32(c)}
+\label{sec:org920b603}
+
+\begin{verbatim}
+t_calc(10,604,20,40,607,16)
+\end{verbatim}
+
+\textbf{RESULTS:}
+ 2.073
+
+Taking the values of \(t_{48,0.975}\approx \dfrac{(t_{40,0.975}+t_{60,0.975})}{2}=\dfrac{2.021+2.000}{2}=2.011\) on a table.
+
+As \(t_{observed}>t_{48,0.975}\), It's statistically significant.
+\clearpage
+
+\section{Exercise 33}
+\label{sec:orged13af6}
+    "Twenty students randomly assigned to an experimental group receive an instructional program; 30 in a
+control group do not. After 6 months, both groups are tested on their knowledge. The experimental group
+has a mean of 38 on the test (with an estimated population standard of 3); the control group has a mean of
+35 (with an estimated standard deviation of 5). Using the .05 level, what should the experimenter conclude?
+(a) Use the steps of hypothesis testing,
+(b) explain your answer to someone who is familiar with the t test for a single sample, but not with the t-test
+for independent means."
+
+\subsection{Solution}
+\label{sec:org721286b}
+\subsubsection{33(a) - Hypothesis steps}
+\label{sec:orga39bba3}
+\begin{itemize}
+\item Step 1: Restate the Question as a Research Hypothesis.
+\item Step 2: Determine the Characteristics of the Comparison
+Distribution.
+\item Step 3: Determine the Cutoff Sample Score on the Comparison
+Distribution at Which the Null Hypothesis Should Be Rejected.
+\item Step 4: Determine Your Sample’s Score on the Comparison
+Distribution.
+\item Step 5: Decide Whether to Reject the Null Hypothesis.
+\end{itemize}
+
+\begin{enumerate}
+\item S1: Is there differences in means? (undirectional)
+\label{sec:org684828d}
+Population 1:  Students who received instructional programs;
+Population 2:  Students who haven't received instructional programs;
+
+\begin{equation}
+\begin{aligned}
+\begin{cases}
+H_0&:\Delta{}\hat{\mu}=0 \\
+H_1&:\Delta{}\hat{\mu}\neq{}0
+\end{cases}
+\end{aligned}
+\end{equation}
+
+\item S2: Data characteristics
+\label{sec:org3c041b4}
+We have the following estimated statistical values,
+\begin{equation}
+\begin{aligned}
+(\hat{\mu_1}=38, \, \hat{\sigma_1}=3, \, \hat{\mu_2}=35, \, \hat{\sigma_2}=5)
+\end{aligned}
+\end{equation}
+
+\item S3: Cutoff
+\label{sec:org2e4196c}
+The alpha level,
+\(\alpha=0.05\)
+
+And the critical t-value:
+\begin{equation}
+\begin{aligned}
+t_{48,0.975}\approx \dfrac{(t_{40,0.975}+t_{60,0.975})}{2}=\dfrac{2.021+2.000}{2}=2.011
+\end{aligned}
+\end{equation}
+
+\item S4: Apply the t-test to our data,
+\label{sec:org67e7303}
+Applying the t-test of two independent means, and using the last's
+problems program written in Python,
+
+\begin{verbatim}
+t_calc(20,38,3,30,35,5)
+\end{verbatim}
+
+\textbf{RESULTS:}
+\(t_{observed}=5.066\)
+
+\item S5: Decide to reject the null hypothesis
+\label{sec:orgf3db67e}
+Because \(t_{observed}=5.066 \gg t_{48,0.975}=2.011\), we can say with
+great confidence that there is a difference between the performance of
+people who took the instructional program.
+\end{enumerate}
+\subsubsection{33(b) - Explain the test for someone who knows t-test for a single sample}
+\label{sec:orgabb2d41}
+
+Just as we estimate the mean and variances of the sample, when we \emph{a priori} choose a
+given value to test out the one sample t-test, we also use estimated
+values but we go a step further an give a experimental estimated value \emph{a
+posteriori} to the control group. 
+
+Thus, following the modus operandi of comparing the \(t_{observed}\) to
+a given table, we found that the alternative hypothesis was strongly
+significant. Taking the instructional program changes notoriously the
+outcomes.
+\clearpage
+
+\section{Exercise 34}
+\label{sec:org4203e57}
+"What are the approximate numbers of participants needed for each of the following planned studies to have
+80\% power, assuming equal numbers in the two groups and all using the .05 significance level? (Be sure to
+give the total number of participants needed, not just the number needed for each group.)
+
+\begin{center}
+\begin{tabular}{lrrrr}
+Expected & - & - & - & -\\
+ & µ1 & µ2 & ơ & Tails\\
+\hline
+a. & 10 & 15 & 25 & 1\\
+b. & 10 & 30 & 25 & 1\\
+c. & 10 & 30 & 40 & 1\\
+d. & 10 & 15 & 25 & 2\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Solution}
+\label{sec:org8990d0a}
+Using python's numerical library
+
+\begin{verbatim}
+from statsmodels.stats.power import TTestIndPower
+\end{verbatim}
+
+\subsubsection{34(a)}
+\label{sec:org975c20b}
+\begin{verbatim}
+# standard deviation  
+std=25
+# means of the samples 
+u1, u2 = 10, 15
+
+# calculate the effect size 
+d = (u1 - u2) / std 
+print(f'Effect size: {d}') 
+
+# factors for power analysis 
+alpha = 0.05
+power = 0.8
+
+power = tt.TTestPower() 
+n_test = power.solve_power(nobs=None, effect_size = d, 
+			   power = 0.8, alpha = 0.05, alternative='smaller')
+n=2*n_test
+print('Total number: {:.3f}'.format(n)) 
+\end{verbatim}
+
+\textbf{RESULTS:} 
+\begin{itemize}
+\item Sample size: 312
+\end{itemize}
+
+\subsubsection{34(b)}
+\label{sec:orgec8a99e}
+\begin{verbatim}
+# standard deviation  
+std=25
+# means of the samples 
+u1, u2 = 10, 30
+
+# calculate the effect size 
+d = (u1 - u2) / std 
+print(f'Effect size: {d}') 
+
+power = tt.TTestPower() 
+n_test = power.solve_power(nobs=None, effect_size = d, 
+			   power = 0.8, alpha = 0.05, alternative='smaller')
+n=2*n_test
+print('Total number: {:.3f}'.format(n)) 
+\end{verbatim}
+
+\textbf{RESULTS:} 
+\begin{itemize}
+\item Sample size: 23
+\end{itemize}
+
+\subsubsection{34(c)}
+\label{sec:orgd0e7713}
+
+\begin{verbatim}
+# standard deviation  
+std=40
+# means of the samples 
+u1, u2 = 10, 30
+
+# calculate the effect size 
+d = (u1 - u2) / std 
+print(f'Effect size: {d}') 
+
+power = tt.TTestPower() 
+n_test = power.solve_power(nobs=None, effect_size = d, 
+			   power = 0.8, alpha = 0.05, alternative='smaller')
+n=2*n_test
+print('Total number: {:.3f}'.format(n)) 
+\end{verbatim}
+
+\textbf{RESULTS:} 
+\begin{itemize}
+\item Sample size: 53
+\end{itemize}
+
+\subsubsection{34(d)}
+\label{sec:orgda8e5ff}
+\begin{verbatim}
+# standard deviation  
+std=25
+# means of the samples 
+u1, u2 = 10, 15
+
+# calculate the effect size 
+d = (u1 - u2) / std 
+print(f'Effect size: {d}') 
+
+power = tt.TTestPower() 
+n_test = power.solve_power(nobs=None, effect_size = d, 
+			   power = 0.8, alpha = 0.05)
+n=2*n_test
+print('Total number: {:.3f}'.format(n)) 
+\end{verbatim}
+
+\textbf{RESULTS:} 
+\begin{itemize}
+\item Sample size: 397
+\end{itemize}
+\clearpage
+
+\section{Exercise 35}
+\label{sec:org9b94a9f}
+
+"An organizational psychologist was interested in whether individuals
+working in different sectors of a company differed in their
+attitudes towards the company. The results for the three people
+surveyed in engineering were 10, 12, and 11; for the three in the
+marketing department, 6, 6, and 8; for the three in accounting, 7,
+4, and 4; and for the three in production, 14, 16, and 13 (higher
+numbers mean more positive attitudes). Was there a significant
+difference in attitude toward the company among employees working in
+different sectors of the company at the .05 level?
+(a) Use the steps of hypothesis testing.
+(b) explain your answer to someone who understands everything
+involved in conducting a t test for independent means, but is
+unfamiliar with the analysis of variance."
+
+\subsection{Solution}
+\label{sec:orgc1c883f}
+\subsubsection{35 (a) Hypothesis Steps}
+\label{sec:org7f9a574}
+\begin{itemize}
+\item Step 1: Restate the Question as a Research Hypothesis.
+\item Step 2: Determine the Characteristics of the Comparison
+Distribution.
+\item Step 3: Determine the Cutoff Sample Score on the Comparison
+Distribution at Which the Null Hypothesis Should Be Rejected.
+\item Step 4: Determine Your Sample’s Score on the Comparison
+Distribution.
+\item Step 5: Decide Whether to Reject the Null Hypothesis.
+\end{itemize}
+\begin{enumerate}
+\item S1: Hypothesis undirectional ANOVA
+\label{sec:org242ecbd}
+Let population 1, 2, 3 and 4 be the populations of Engineers,
+Marketing, Accountants and Production's departments.
+
+The Null and alternative hypothesis follow,
+     \begin{equation}
+\begin{aligned}
+\begin{cases}
+     H_0: \hat{\mu_1}&=\hat{\mu_2}=\hat{\mu_3}=\hat{\mu_4}\\
+     H_1: \hat{\mu_i}&\neq \hat{\mu_j},\quad i\neq{}j
+\end{cases}
+\end{aligned}
+\end{equation}
+\item S2: Compare multiple instances of means; F-degrees
+\label{sec:org1b356e2}
+We will use ANOVA - Analysis of Variance - due to the fact that
+are more than two measures to be tested against each other. The
+degrees of freedom for the F-distribution are:
+ 	  \begin{equation}
+     \begin{aligned}
+     \begin{cases}
+df_{between}&=3 \\
+df_{within}&=8
+     \end{cases}
+     \end{aligned}
+     \end{equation}
+\item S3: Cutoff
+\label{sec:org2c28206}
+Looking at a F-table, \(F_{(3,8),\,\alpha=0.05}=8.8452\).
+\item S4: Calculate out F-observed
+\label{sec:orgf6dc10d}
+Using Python, the powerful scipy.stats have a Oneway F test ready,
+
+\begin{verbatim}
+from scipy.stats import f_oneway
+\end{verbatim}
+
+State the data,
+\begin{verbatim}
+engineers=[10,12,11]
+marketing=[6,6,8]
+accountant=[7,4,4]
+production=[14,16,13]
+\end{verbatim}
+
+Solve the problem,
+\begin{verbatim}
+f_oneway(engineers,marketing,accountant,production)
+\end{verbatim}
+
+\textbf{RESULTS:}
+F\textsubscript{onewayResult}(statistic=27.98550724637679, pvalue=0.00013597313862900978)
+
+\item S5: Reject Null Hypothesis
+\label{sec:org61958c9}
+\(T_{observed}=27.99 \gg F_{(3,8),\,\alpha=0.05}=8.8452\)
+therefore, with great confidence, we can say there is a
+difference in attitude in a company, dependent on sector.
+\end{enumerate}
+\subsubsection{35 (b) Explain to who know t-tests}
+\label{sec:org3266fae}
+A way to systematically tests multiple populations with equivalent
+t-tests two-by-two would be to use the ANOVA.
+
+In this test, we can find a cutoff by looking at the degrees of
+freedom in between groups (4 different one, leading to 3 degrees
+of freedom) and within groups (3 different mesures for 4 different
+groups giving a total of 8 degrees of freedom); finally the
+\(\alpha=0.05\).
+
+We test the variances of variance among and within groups, and
+make a ratio of them. As the result should that the variance due
+to variance among groups is way greater than within groups, then
+we can assert that the effect of variability is due to these
+groups having different behaviour in general (means and/or variation). 
+\clearpage
+
+\section{Exercise 36}
+\label{sec:org9e63690}
+"Rosalie Friend (2001), an educational psychologist, compared three methods of teaching writing. Students
+were randomly assigned to three different experimental conditions involving different methods of writing a
+summary. At the end of the two days of instructions, participants wrote a summary. One of the ways it was
+scored was the percentage of specific details of information it included from the original material. Here is a
+selection from her article describing one of the findings:
+The effect of summarization method on inclusion of important information was significant:
+F(2, 144) = 4.1032, p < .019. The mean scores (with standard deviations in parentheses) were as follows:
+Argument Repetition, 59.6\% (17.9); Generalization, 59.8\% (15.2); and Self-Reflection, 50.2\% (18.0). (p. 14.)
+Explain these results to a person who has never had a course in statistics. Also, using the information in the
+above description."
+
+\subsection{Solution}
+\label{sec:org27c3b30}
+This means that the chance of the high variation of scores be as
+extreme as the found in the study by change is of 1,9\%. That is, we
+would need to repeat the study 100 times to find 2 of them having
+such extreme values by chance (not due to the method efficacy).
+
+The \(F(2,144)=4.1032\) can be used, together with the data of means
+and standard deviations of each groups to derive an indirect
+measure of how much the method contributed to the differences in
+scores. If this value is greater than \(F(2,144)\), then method is
+efficient in producing different scores.
+
+\subsubsection{Calculus of F observed}
+\label{sec:org0a43022}
+    \begin{equation}
+\begin{aligned}
+F&=\dfrac{S_{Between}}{S_{Within}}\\
+\quad S_{Between}&=\sqrt{n.S^2_M}\\
+ S^2_M&=\dfrac{\sum{(M-GM)^2}}{df_{between}}\\
+\quad S_{Within}&=\dfrac{\sum_{i=1}^N{S_i^2}}{N}
+\end{aligned}
+\end{equation}
+
+
+In which n: number of individuals per group; N: number of groups.
+3.(n-1)=144 => n=(144+3)/3=49; N-1=2 => N=3.
+
+\begin{enumerate}
+\item \(S_{between}\)
+\label{sec:org9c730e4}
+
+     \begin{equation}
+\begin{aligned}
+     GM &= \dfrac{(59.6+39.8+50.2)}{3}=49.9\\
+     \implies S^2_M&=\dfrac{(59.6-49.9)^2+(39.8-49.9)^2+(50.2-49.9)^2}{(3-1)}= 98.1\\
+\implies S_{Between}&=\sqrt{(\frac{144+3}{3}) \times 98.1}=69.33
+\end{aligned}
+\end{equation}
+
+\item \(S_{Within}\)
+\label{sec:org02b7a1f}
+\(S_{Within}= \dfrac{(17.9 + 15.2 + 18.0)}{3}=17.0\)
+
+\item \(F_{observed}\)
+\label{sec:org41f42c8}
+\(F_{observed}=\frac{S_{between}}{S_{within}}=\frac{69.33}{17.0}=4.08\)
+
+We conclude \(F_{observed}<F_{(2,144),0.05}\). So, in theory this result
+is negative. To be significant the result should be above the table
+value.
+\end{enumerate}
+\clearpage
+
+\section{Exercise 37}
+\label{sec:org1cea91a}
+"A researcher wants to be sure that the sample in her study is not
+unrepresentative of the distribution of
+ethnic groups in her community. Her sample includes 300 whites, 80
+African Americans, 100 Latinos, 40
+Asians, and 80 others. In her community, according to census records,
+there are 48\% whites, 12\% African
+Americans, 18\% Latinos, 9\% Asians, and 13\% others. Is her sample
+unrepresentative of the population in her community? (Use the .05
+level)
+\begin{itemize}
+\item Carry out the steps of hypothesis testing.
+\item Explain these results to a person who has never had a course in statistics."
+\end{itemize}
+
+\subsection{Solution}
+\label{sec:org2a8e4f6}
+\subsubsection{37(a) Hypothesis Steps}
+\label{sec:orgdb513ec}
+\begin{itemize}
+\item Step 1: Restate the Question as a Research Hypothesis.
+\item Step 2: Determine the Characteristics of the Comparison
+Distribution.
+\item Step 3: Determine the Cutoff Sample Score on the Comparison
+Distribution at Which the Null Hypothesis Should Be Rejected.
+\item Step 4: Determine Your Sample’s Score on the Comparison
+Distribution.
+\item Step 5: Decide Whether to Reject the Null Hypothesis.
+\end{itemize}
+
+\begin{enumerate}
+\item S1: Hypothesis Restatement
+\label{sec:orgfeb2f88}
+\(\textrm{Population}_{\{1,2,3,4,5\}}\) are the White, African Americans, Latinos
+and Asian, and Others respectively.
+
+\(H_0\) says that the samples are representative of the community
+distribution, regarding frequency.\(H_1\) is that is does not.
+
+\item S2: Characteristics
+\label{sec:orgbd0726f}
+The comparison is a Chi-squared, with degree of freedom, \(df=5-1=4\).
+
+\item S3: Cutoff
+\label{sec:org2dde5c6}
+The standard is of \(\alpha=0.05\). Looking a table
+\(\chi_{4,0.05}=9.488\). So, we have to achieve a
+\(\chi_{observed}>\chi_{4,0.95}=9.488\) in order to negate \(H_0\).
+
+\item S4: Metrics on observed data
+\label{sec:org20c7522}
+Using Python's scipy.stats, we can easily derive these results
+\begin{verbatim}
+import scipy.stats as st
+import numpy as np
+\end{verbatim}
+
+Declaring the data, quantity per group and expected quantity per group,
+\begin{verbatim}
+qtt_per_gr = [300, 80, 100, 40, 80]
+\end{verbatim}
+
+Generate the expected quantity per group \(f_{expected_\{i\}}=f_i
+\times \sum{n_i}\)
+which \(n_i\) is the number of observed people in a community.
+
+\begin{verbatim}
+frq = [0.48,0.12,0.18,0.09,0.13]
+expt_per_gr=[(frq[i] * np.sum(qtt_per_gr)) for i in range(len(frq))]
+\end{verbatim}
+
+\begin{verbatim}
+st.chisquare(qtt_per_gr,expt_per_gr)
+\end{verbatim}
+
+\textbf{RESULTS:}
+Power\textsubscript{divergenceResult}(statistic=5.662393162393162, pvalue=0.22581947016382237)
+
+\item S5: Do not reject the Null Hypothesis
+\label{sec:orgaa79664}
+The value observer for \(\chi_{observed}=5.662 <
+     \chi_{4,0.95}=9.488\).
+Therefore, the sample do properly represent the general
+population. 22 out of 100 time we do this experiment we would get
+as extreme differences of frequences in this population, by random.
+\end{enumerate}
+\clearpage
+
+\subsubsection{37 (b)}
+\label{sec:org8a20598}
+The general population is well represented in this setup. It would
+not be rare to pick randomly people in the population and end up
+with the study's populations ratio.
+\section{Exercise 38}
+\label{sec:org0ab1339}
+\subsection{Solution}
+\label{sec:orgaac6eac}
+\subsubsection{37(a) Hypothesis Steps}
+\label{sec:org7bb0daa}
+\begin{itemize}
+\item Step 1: Restate the Question as a Research Hypothesis.
+\item Step 2: Determine the Characteristics of the Comparison
+Distribution.
+\item Step 3: Determine the Cutoff Sample Score on the Comparison
+Distribution at Which the Null Hypothesis Should Be Rejected.
+\item Step 4: Determine Your Sample’s Score on the Comparison
+Distribution.
+\item Step 5: Decide Whether to Reject the Null Hypothesis.
+\end{itemize}
+
+\begin{enumerate}
+\item S1: Hypothesis Restatement
+\label{sec:org22fdf83}
+\(\textrm{Population}_{\{1,2,3\}}\) are the populations who
+preference A, B and C, at first respectively.
+
+\(H_0\) says that the popularity would be measure as equal
+regarding frequency.\(H_1\) is that is does not happen, the "inate"
+preference remains, regardless of marketing.
+
+\item S2: Characteristics
+\label{sec:org1d2f13d}
+The comparison is a Chi-squared, with degree of freedom, \(df=3-1=2\).
+
+\item S3: Cutoff
+\label{sec:org9db4bf8}
+The standard is of \(\alpha=0.05\). Looking a table
+\(\chi_{2,0.05}=5.991\). So, we have to achieve a
+\(\chi_{observed}>\chi_{2,0.95}\) in order to negate \(H_0\).
+
+\item S4: Metrics on observed data
+\label{sec:org9d6764f}
+Using Python's scipy.stats,
+\begin{verbatim}
+import scipy.stats as st
+import numpy as np
+\end{verbatim}
+
+Declaring the data, quantity per group and expected quantity per group,
+\begin{verbatim}
+qtt_per_gr = [197,120,210]
+\end{verbatim}
+Generate the expected quantity per group \(f_{expected_{\{i\}}}=f_i
+\times \sum{n_i}\)
+which \(n_i\) is the number of observed people in a community.
+
+\begin{verbatim}
+frq = [1/3,1/3,1/3]
+expt_per_gr=[(frq[i] * np.sum(qtt_per_gr)) for i in range(len(frq))]
+\end{verbatim}
+
+\begin{verbatim}
+st.chisquare(qtt_per_gr,expt_per_gr)
+\end{verbatim}
+
+\textbf{RESULTS:}
+Power\textsubscript{divergenceResult}(statistic=26.94117647058824, pvalue=1.4118802443206298e-06)
+
+\item S5: Reject the Null Hypothesis
+\label{sec:org3252f76}
+The value observer for \(\chi_{observed}=26.94 >
+     \chi_{2,0.05}=5.991\).
+Therefore, the expected frequency do poorly represent the general
+frequency observe. Therefore, it means the study hypothesis had
+failed. People didn't hold a preference, because of how subjects
+were presented.
+\end{enumerate}
+
+\subsubsection{38 (b)}
+\label{sec:org62f797e}
+This result shows that the only way that we would obtain these
+values of popularity distributions, if in fact presenting people
+before hand as equal had the causal role, is if we took a sample
+that only would occur 14 times out of 1000. That is, presenting
+people before hand do not determine popularity.
+\clearpage
+
+\section{Exercise 39}
+\label{sec:orgd1b382f}
+"Below are results of a survey of a sample of people buying ballet
+tickets, laid out according to the type of seat
+they purchased and how regularly they attended. Is there a significant
+relation? (Use the .05 level.)
+\begin{itemize}
+\item Carry out the steps of hypothesis testing.
+\item Explain your answer to someone who has never had a course in
+statistics.
+\end{itemize}
+\begin{center}
+\begin{tabular}{llrr}
+\hline
+ &  & Attendance & \\
+\hline
+ &  & Regularly & Occasional\\
+\hline
+ & Orchestra & 20 & 80\\
+Seating Category & Dress Circle & 20 & 20\\
+ & Balcony & 40 & 80\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Solution}
+\label{sec:org662e09f}
+\subsubsection{39(a) Hypothesis Steps}
+\label{sec:orge708bb8}
+\begin{itemize}
+\item Step 1: Restate the Question as a Research Hypothesis.
+\item Step 2: Determine the Characteristics of the Comparison
+Distribution.
+\item Step 3: Determine the Cutoff Sample Score on the Comparison
+Distribution at Which the Null Hypothesis Should Be Rejected.
+\item Step 4: Determine Your Sample’s Score on the Comparison
+Distribution.
+\item Step 5: Decide Whether to Reject the Null Hypothesis.
+\end{itemize}
+
+\begin{enumerate}
+\item S1: Hypothesis Restatement
+\label{sec:org88cccf4}
+There are 3x2 design of variables, two nominal relating to
+frequency and three nominal related to seating category.
+
+\(H_0\) says that the popularity would be measured as equal
+regarding frequency and seating category; that is, they are
+independent dimensions of behaviour. \(H_1\) is that there exist in
+fact dependency between Seating Category and Frequency of
+attendence.
+
+\item S2: Characteristics
+\label{sec:org7e92da5}
+The comparison is a Chi-squared of independece, with degree of
+freedom,
+     \begin{equation}
+\begin{aligned}
+     df_1=3-1=2,\, df_2=2-1&=1 \, \Leftrightarrow \,
+     (df_1,df_2)&=(2,1)\\
+\implies df=df_1 \times df_2 = 2*1 = 2
+
+\end{aligned}
+\end{equation}
+
+
+\item S3: Cutoff
+\label{sec:orgeb019df}
+The standard is of \(\alpha=0.05\). Looking a table
+\(\chi_{2,0.05}=5.991\). So, we have to achieve a
+\(\chi_{observed}>\chi_{2,0.95}\) in order to negate \(H_0\).
+
+\item S4: Metrics on observed data
+\label{sec:org6a2ede3}
+Using Python's scipy.stats,
+\begin{verbatim}
+
+      import pandas as pd
+import numpy as np
+from scipy.stats import chi2_contingency
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+%matplotlib inline 
+
+\end{verbatim}
+
+Declaring the data format,
+\begin{verbatim}
+df = pd.DataFrame({
+    'Attendence':np.concatenate((
+	np.array(['Regular']*20),
+	np.array(['Occasional']*80),
+	np.array(['Regular']*20),
+	np.array(['Occasional']*20),
+	np.array(['Regular']*40),
+	np.array(['Occasional']*80))),
+    'SeatingCategory':np.concatenate((
+	np.array(['Orchestra']*100),
+	np.array(['DressCircle']*40),
+	np.array(['Balcony']*120)))})
+df.head()
+\end{verbatim}
+
+Seeing if the table was rightfully stated,
+
+\begin{verbatim}
+contigency= pd.crosstab(df['Attendence'], df['SeatingCategory'])
+contigency
+\end{verbatim}
+
+\begin{center}
+\begin{tabular}{lrrr}
+SeatingCategory & Balcony & DressCircle & Orchestra\\
+Attendence &  &  & \\
+\hline
+Occasional & 80 & 20 & 80\\
+Regular & 40 & 20 & 20\\
+\end{tabular}
+\end{center}
+
+
+Generate the expected quantity per group \(f_{expected_{\{i\}}}=\dfrac{n_i}{\sum{n_j}}\).
+
+\begin{verbatim}
+contigency_pct = pd.crosstab(df['Attendence'], df['SeatingCategory'], normalize='index')
+contigency_pct
+\end{verbatim}
+
+\begin{verbatim}
+# Chi-square test of independence.
+c, p, dof, expected = chi2_contingency(contigency)
+c,p
+\end{verbatim}
+
+\textbf{RESULTS:}
+\((\chi{},p_{value})=(12.759259259259263, 0.0016957508962184467)\)
+
+
+Let's see the heatmap for this problem,
+
+\begin{verbatim}
+plt.figure(figsize=(12,8))
+sns.heatmap(contigency, annot=True, cmap="YlGnBu")
+\end{verbatim}
+\begin{center}
+\includegraphics[width=.9\linewidth]{ein-images/ob-ein-12f4e03a07295d4277c34e8e9787fc90.png}
+\end{center}
+
+
+
+\item S5: Reject the Null Hypothesis
+\label{sec:org9b3d8ee}
+The value observer for \(\chi_{observed}=12.759 >
+     \chi_{2,0.05}=5.991\).
+Therefore, we can say that, in fact, there is an inbalance in the distribution of seats-type regarding frequency.
+\end{enumerate}
+
+\subsubsection{39 (b)}
+\label{sec:orgafc06e8}
+In other words, there is a relationship between frequency and the type of show one attend. Occasional attendents will prefer more Operas and Orchestras.
+\clearpage
+
+\section{Exercise 40}
+\label{sec:orgd274bec}
+"About how many participants do you need for 80\% power in each of the following planned studies, using a chi-square test of independence with p < .05?"
+
+\begin{center}
+\begin{tabular}{llr}
+\hline
+ & Predicted Effect Size & Design\\
+\hline
+(a) & Small & 2x2\\
+(b) & Medium & 2x2\\
+(c) & Large & 2x2\\
+(d) & Small & 3x3\\
+(e) & Medium & 3x3\\
+(f) & Large & 3x3\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Solution}
+\label{sec:org74a383b}
+We will be using statsmodels.stats.power.GofChisquarePower library in Python,
+\begin{verbatim}
+import statsmodels.stats.power as p
+\end{verbatim}
+
+\subsubsection{40(a) Small 2x2}
+\label{sec:org5cce9dd}
+\begin{verbatim}
+p.GofChisquarePower().solve_power(effect_size=0.2,
+				alpha=0.05,
+				power=0.80,
+				n_bins=4)
+\end{verbatim}
+
+\textbf{RESULTS:}
+ 273
+
+\subsubsection{40(b) Medium 2x2}
+\label{sec:org1ee074e}
+\begin{verbatim}
+p.GofChisquarePower().solve_power(effect_size=0.5,
+				alpha=0.05,
+				power=0.80,
+				n_bins=4)
+\end{verbatim}
+
+\textbf{RESULTS:}
+44
+
+\subsubsection{40 (c) Large 2x2}
+\label{sec:orgee29cd6}
+\begin{verbatim}
+p.GofChisquarePower().solve_power(effect_size=0.8,
+				alpha=0.05,
+				power=0.80,
+				n_bins=4)
+\end{verbatim}
+
+\textbf{RESULTS:}
+17
+
+\subsubsection{40(d) Small}
+\label{sec:org692abe3}
+\begin{verbatim}
+p.GofChisquarePower().solve_power(effect_size=0.2,
+				alpha=0.05,
+				power=0.80,
+				n_bins=9)
+\end{verbatim}
+
+\textbf{RESULTS:}
+ 376
+
+\subsubsection{40(e) Medium}
+\label{sec:org9025c4f}
+
+\begin{verbatim}
+p.GofChisquarePower().solve_power(effect_size=0.5,
+				alpha=0.05,
+				power=0.80,
+				n_bins=9)
+\end{verbatim}
+
+\textbf{RESULTS:}
+60
+
+\subsubsection{40(f) Large}
+\label{sec:orge154e4e}
+\begin{verbatim}
+p.GofChisquarePower().solve_power(effect_size=0.8,
+				alpha=0.05,
+				power=0.80,
+				n_bins=9)
+\end{verbatim}
+
+\textbf{RESULTS:}
+24
+\end{document}

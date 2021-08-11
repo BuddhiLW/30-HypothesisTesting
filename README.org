@@ -1,0 +1,50 @@
+* Statistical Solutions to Master Degree's Statistics problems
+
+The current folder structure is:
+#+begin_src shell
+  [Statistics-questions]$ tree .
+  .
+      |-- Questions_Catalogue_Statistics_starting_WS19-20.pdf
+      |-- README.org
+      |-- Solution.org
+      |-- Statistics-PedroBranquinho.tex
+      |-- Statistics-PedroBranquinho.pdf
+      (...)
+#+end_src
+
+Here, one finds the file =Statistics-PedroBranquinho.pdf= which is my
+solutions to problems 10-40 of
+=Questions_Catalogue_Statistics_starting_WS19-20.pdf=.
+
+* Some outputs (Gallery)
+- Z-tests:
+  #+HTML_ATTR: :width 500
+    [[file:ein-images/ob-ein-a1a029700f2bb435bea76544f589baa8.png][file:~/PP/LaTeX/Statistics-questions/ein-images/ob-ein-a1a029700f2bb435bea76544f589baa8.png]]
+- Undirectional T-test:
+    #+HTML_ATTR: :width 500
+    [[file:ein-images/ob-ein-1bb6325678a717b7b9bb0c7a1b652287.png][file:~/PP/LaTeX/Statistics-questions/ein-images/ob-ein-1bb6325678a717b7b9bb0c7a1b652287.png]]
+- Paired directional T-tests:
+    #+HTML_ATTR: :width 500
+    [[file:ein-images/ob-ein-a424b2f89ceb3014e785f5e69cb79ace.png][file:~/PP/LaTeX/Statistics-questions/ein-images/ob-ein-a424b2f89ceb3014e785f5e69cb79ace.png]]
+- Chi-squared heatmap:
+    #+HTML_ATTR: :width 500
+    >[[file:ein-images/ob-ein-12f4e03a07295d4277c34e8e9787fc90.png][file:~/PP/LaTeX/Statistics-questions/ein-images/ob-ein-12f4e03a07295d4277c34e8e9787fc90.png]]
+* List of Subjects Studied
+- Z-tests.
+- T-tests.
+- ANOVA/F-tests.
+- Chi-squared tests.
+- Good of Fitness tests.
+- Power, Alpha and Beta errors (Type I and Type II errors).
+
+* Tools Used
+** Python
+We used the following libraries: =numpy=, =matplotlib.pyploy=, =statsmodels=, =scipy=, =pandas=, =seaborn=.
+** Orgmode and Ein
+We followed a style of Literate Programming, proposed by Donald
+Knuth. So, we mixed code with the text-solution in one file:
+=Solution.org=.
+
+This is possible because we are using Org-mode in Emacs and
+Ein-python -  a port from Jupyter to Emacs - to avaluate python code.
+
