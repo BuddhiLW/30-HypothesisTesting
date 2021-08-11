@@ -19,16 +19,16 @@ solutions to problems 10-40 of
 * Some outputs (Gallery)
 - Z-tests:
   #+HTML_ATTR: :width 500
-    [[file:ein-images/ob-ein-a1a029700f2bb435bea76544f589baa8.png][file:~/PP/LaTeX/Statistics-questions/ein-images/ob-ein-a1a029700f2bb435bea76544f589baa8.png]]
+    [[file:ein-images/ob-ein-a1a029700f2bb435bea76544f589baa8.png][file:ein-images/ob-ein-a1a029700f2bb435bea76544f589baa8.png]]
 - Undirectional T-test:
     #+HTML_ATTR: :width 500
-    [[file:ein-images/ob-ein-1bb6325678a717b7b9bb0c7a1b652287.png][file:~/PP/LaTeX/Statistics-questions/ein-images/ob-ein-1bb6325678a717b7b9bb0c7a1b652287.png]]
+    [[file:ein-images/ob-ein-1bb6325678a717b7b9bb0c7a1b652287.png][file:ein-images/ob-ein-1bb6325678a717b7b9bb0c7a1b652287.png]]
 - Paired directional T-tests:
     #+HTML_ATTR: :width 500
-    [[file:ein-images/ob-ein-a424b2f89ceb3014e785f5e69cb79ace.png][file:~/PP/LaTeX/Statistics-questions/ein-images/ob-ein-a424b2f89ceb3014e785f5e69cb79ace.png]]
+    [[file:ein-images/ob-ein-a424b2f89ceb3014e785f5e69cb79ace.png][file:ein-images/ob-ein-a424b2f89ceb3014e785f5e69cb79ace.png]]
 - Chi-squared heatmap:
     #+HTML_ATTR: :width 500
-    >[[file:ein-images/ob-ein-12f4e03a07295d4277c34e8e9787fc90.png][file:~/PP/LaTeX/Statistics-questions/ein-images/ob-ein-12f4e03a07295d4277c34e8e9787fc90.png]]
+    [[file:ein-images/ob-ein-12f4e03a07295d4277c34e8e9787fc90.png][file:ein-images/ob-ein-12f4e03a07295d4277c34e8e9787fc90.png]]
 * List of Subjects Studied
 - Z-tests.
 - T-tests.
